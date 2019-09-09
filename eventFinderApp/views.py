@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Event, Category
 from .forms import PostForm
 
@@ -18,7 +18,14 @@ class EventView(generic.DetailView):
     template_name = 'eventFinderApp/event.html'
 
 def event_submit(request):
-    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.save()
+            return redirect('eventFinderApp/event_submit.html')
+    else:
+        form = PostForm()
     return render(request, 'eventFinderApp/event_submit.html', {'form': form})
 
 def account(request):
