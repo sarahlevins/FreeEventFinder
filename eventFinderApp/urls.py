@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:pk>/', views.EventView.as_view(), name='event'),
     # event-finder/my-account
     path('my-account/', views.account, name='account')
+    # path('form', views.get_name(), name='form')
 ]
