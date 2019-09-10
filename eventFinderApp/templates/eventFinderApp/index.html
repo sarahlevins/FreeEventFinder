@@ -1,9 +1,9 @@
 {% extends "./base.html" %}
 
 {% block content %}
-
-    <button id="new-event">+ Create new event</button>
     <h3>See what's on!</h3>
+    <a href="{% url 'eventFinderApp:event_submit' %}"><button id="new-event">+ Create new event</button></a>
+
     {% if events_list %}
         {% for event in events_list %}
             {% include "./detailsBox.html" with event=event %}
