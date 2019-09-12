@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.contrib.auth.models import User
 
 class Event(models.Model):
@@ -8,6 +9,9 @@ class Event(models.Model):
     start_time = models.DateTimeField('start time and date')
     end_time = models.DateTimeField('end time and date')
     categories = models.ManyToManyField('Category')
+
+    def get_absolute_url(self):
+        return reverse("eventFinderApp:event", kwargs={"pk": self.pk})
 
     def __str__(self):
         return self.title
