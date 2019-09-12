@@ -13,4 +13,4 @@ class PostForm(forms.ModelForm):
         'venue', 
         'start_time', 
         'end_time', 
-        'categories')
+        'categories',)

@@ -23,7 +23,8 @@ def event_submit(request):
         if form.is_valid():
             event = form.save(commit=False)
             event.save()
-            return redirect('eventFinderApp/event_submit.html')
+            form.save_m2m()
+            return redirect('/event-finder/')
     else:
         form = PostForm()
     return render(request, 'eventFinderApp/event_submit.html', {'form': form})
