@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.shortcuts import render, redirect
 from .models import Event, Category
 from .forms import NewEventForm
@@ -55,7 +55,16 @@ class CreateEventView(CreateView):
     def form_valid(self, form):
         print(form.cleaned_data)
         return super().form_valid(form)
-    
 
-def account(request):
-    return render(request, 'eventFinderApp/account.html')
+
+class EditEventView(UpdateView):
+    template_name = 'eventFinderApp/event_edit.html'
+    form_class = NewEventForm
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+    
+    def get_object(self):
+        event_id = self.kwargs.get('pk')
+        return get_object_or_404(Event, pk=event_id)
