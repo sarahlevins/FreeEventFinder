@@ -2,7 +2,6 @@ from django.urls import path
 
 from . import views
 
-
 app_name = 'eventFinderApp'
 
 urlpatterns = [
@@ -12,5 +11,5 @@ urlpatterns = [
     path('<int:pk>/', views.EventView.as_view(), name='event'),
     # event-finder/my-account
     path('my-account/', views.account, name='account'),
-    path('event_submit/', views.event_submit, name='event_submit'),
+    path('event_submit/', views.CreateEventView.as_view(), name='event_submit'),
 ]

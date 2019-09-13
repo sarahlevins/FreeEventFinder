@@ -3,7 +3,7 @@ from django.forms import ModelForm
 
 from .models import Event
 
-class PostForm(forms.ModelForm):
+class NewEventForm(forms.ModelForm):
 
     class Meta:
         model = Event
@@ -13,4 +13,5 @@ class PostForm(forms.ModelForm):
         'venue', 
         'start_time', 
         'end_time', 
-        'categories')
+        'categories',)
+    
