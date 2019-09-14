@@ -1,5 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView, UpdateView
 from django.shortcuts import render, redirect
 from .models import Event, Category
@@ -18,11 +19,12 @@ class EventView(generic.DetailView):
     model = Event
     template_name = 'eventFinderApp/event.html'
 
-class CreateEventView(CreateView):
+class CreateEventView(LoginRequiredMixin, CreateView):
     template_name = 'eventFinderApp/event_submit.html'
     form_class = NewEventForm
 
     def form_valid(self, form):
+        form.instance.host = self.request.user
         print(form.cleaned_data)
         return super().form_valid(form)
 
