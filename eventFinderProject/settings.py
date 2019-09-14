@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'crispy_forms',
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_URL = '/users/login/'
@@ -132,4 +134,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'

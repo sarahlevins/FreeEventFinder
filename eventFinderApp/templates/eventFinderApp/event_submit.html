@@ -1,10 +1,17 @@
 {% extends "./base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <h2>New post</h2>
     <form method="POST" class="NewEventForm">
         {% csrf_token %}
-        {{ form.as_p | crispy }}
+        {{ form.title | as_crispy_field }}
+        {{ form.venue | as_crispy_field}}
+        {{ form.location | as_crispy_field }}
+        {{ form.start_time | as_crispy_field }}
+        {{ form.end_time| as_crispy_field }}
+        {{ form.categories | as_crispy_field }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
+
 {% endblock %}
