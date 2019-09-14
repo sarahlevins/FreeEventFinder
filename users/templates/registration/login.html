@@ -16,11 +16,10 @@
 {% endif %}
 
 <form method="post" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <p>lol</p>
-  <button type="submit" value="login" class="btn btn-primary">Login</button>
-  <input type="hidden" name="next" value="{{ next }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" value="login" class="btn btn-primary">Login</button>
+    <input type="hidden" name="next" value="{{ next }}">
 </form>      
 {% endblock %}
       

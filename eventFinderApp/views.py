@@ -22,6 +22,7 @@ class EventView(generic.DetailView):
 class CreateEventView(LoginRequiredMixin, CreateView):
     template_name = 'eventFinderApp/event_submit.html'
     form_class = NewEventForm
+    login_url = '/users/login/'
 
     def form_valid(self, form):
         form.instance.host = self.request.user
