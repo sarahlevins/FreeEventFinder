@@ -4,7 +4,7 @@ html {
 
 body {
     margin: 50px;
-    font-family: 'Manjari', sans-serif;
+    font-family: 'Cinzel', sans-serif;
 }
 
 h1 {
@@ -20,37 +20,31 @@ h2 {
 }
 
 header {
-    display: flex-wrap;
-    justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #000;
     margin-bottom: 20px;
 }
 
 nav a {
-    /* margin: 0 10px; */
+    margin: 0 10px;
 }
 
 a {
     color: #2b6e5e;
-    font-family: 'Manjari', sans-serif;
+    font-family: 'Cinzel', sans-serif;
 
 }
 
-.navbar {
-    justify-content: right;
-}
-
-.nav-item{
-    border: 1px solid #000;
-
+#navbar-wrapper{
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
 }
 
 #new-event {
     width: 100%;
     background-color: #2b6e5e;
     color: #fff;
-    font-family: 'Manjari', sans-serif;
+    font-family: 'Cinzel', sans-serif;
     border: 1px solid #2b6e5e;
     border-radius: 5px;
     font-size: 1.5rem;
