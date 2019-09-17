@@ -8,19 +8,23 @@
         <title>Event Finder</title>
         <meta name="description" content="">
         <meta name="author" content="Sarah Levins">
-        <link rel="stylesheet" type="text/css" href="{% static 'eventFinderApp/bootstrap.css' %}">
-        
-        <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Bangers|Cinzel|Manjari&display=swap" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{% static 'eventFinderApp/style.css' %}">
+
     </head>
 
     <body>
         <header>
             <div>
-                <h1>EventFinder</h1>
-                <h2>Find free events near you!</h2>
+                <h1>You're Not Too Poor.</h1>
+                <h2>No more excuses. Go out.</h2>
             </div>
             {% include './nav.html' %}
+
         </header>
 
         {% block content %}{% endblock %}
