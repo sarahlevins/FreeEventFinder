@@ -1,13 +1,13 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic, View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, UpdateView
-from django.shortcuts import render, redirect
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Event, Category
 from .forms import NewEventForm
 
 
-class IndexView(generic.ListView):
+class IndexView(ListView):
     template_name = 'eventFinderApp/index.html'
     context_object_name = 'events_list'
 
@@ -15,7 +15,7 @@ class IndexView(generic.ListView):
         '''Return the events.'''
         return Event.objects.all()
 
-class EventView(generic.DetailView):
+class EventView(DetailView):
     model = Event
     template_name = 'eventFinderApp/event.html'
 
@@ -33,10 +33,10 @@ class EditEventView(UpdateView):
     template_name = 'eventFinderApp/event_edit.html'
     form_class = NewEventForm
 
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super().form_valid(form)
-    
     def get_object(self):
         event_id = self.kwargs.get('pk')
         return get_object_or_404(Event, pk=event_id)
+    
+
+
+

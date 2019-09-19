@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>Edit Event</h2>
+    <form method="POST" class="NewEventForm">
+        {% csrf_token %}
+        {{ form.title | as_crispy_field }}
+        {{ form.venue | as_crispy_field}}
+        {{ form.location | as_crispy_field }}
+        {{ form.start_time | as_crispy_field }}
+        {{ form.end_time| as_crispy_field }}
+        {{ form.categories | as_crispy_field }}
+        <button type="submit" value="Update" class="save btn btn-default">Save</button>
+    </form>
+
+{% endblock %}

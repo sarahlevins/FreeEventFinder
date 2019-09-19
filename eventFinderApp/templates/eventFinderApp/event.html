@@ -1,4 +1,4 @@
-{% extends "./base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -14,5 +14,6 @@
     {% endfor %}
 </p>
 
+<p><a href="{% url 'eventFinderApp:event_edit' event.id %}">Edit Event</a></p>
 
 {% endblock %}
