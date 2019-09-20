@@ -1,9 +1,11 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.views import generic, View
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView, UpdateView, DetailView, ListView
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Event, Category
+from django.views import View
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
+
+from .models import Event
 from .forms import NewEventForm
 
 
@@ -19,6 +21,8 @@ class EventView(DetailView):
     model = Event
     template_name = 'eventFinderApp/event.html'
 
+    
+
 class CreateEventView(LoginRequiredMixin, CreateView):
     template_name = 'eventFinderApp/event_submit.html'
     form_class = NewEventForm
@@ -29,14 +33,16 @@ class CreateEventView(LoginRequiredMixin, CreateView):
         print(form.cleaned_data)
         return super().form_valid(form)
 
-class EditEventView(UpdateView):
+class EditEventView(LoginRequiredMixin, UpdateView):
     template_name = 'eventFinderApp/event_edit.html'
     form_class = NewEventForm
 
     def get_object(self):
         event_id = self.kwargs.get('pk')
         return get_object_or_404(Event, pk=event_id)
-    
+
+
+
 
 
 
