@@ -21,7 +21,9 @@ class EventView(DetailView):
     model = Event
     template_name = 'eventFinderApp/event.html'
 
-    
+    def get_queryset(self):
+        hosted_events = Event.objects.filter(host=self.request.user)
+        return hosted_events
 
 class CreateEventView(LoginRequiredMixin, CreateView):
     template_name = 'eventFinderApp/event_submit.html'
@@ -39,7 +41,7 @@ class EditEventView(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         event_id = self.kwargs.get('pk')
-        return get_object_or_404(Event, pk=event_id)
+        return get_object_or_404(Event, pk=event_id, host=self.request.user)
 
 
 

@@ -14,6 +14,8 @@
     {% endfor %}
 </p>
 
-<p><a href="{% url 'eventFinderApp:event_edit' event.id %}">Edit Event</a></p>
 
+{% if user.username == event.host.username %}
+    <p><a href="{% url 'eventFinderApp:event_edit' event.id %}">Edit Event</a></p>
+{% endif %}
 {% endblock %}
