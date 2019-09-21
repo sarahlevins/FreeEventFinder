@@ -1,12 +1,15 @@
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views import generic, View
-from django.views.generic import CreateView
-from django.shortcuts import render, redirect
-from .models import Event, Category
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
+
+from .models import Event
 from .forms import NewEventForm
 
 
-class IndexView(generic.ListView):
+class IndexView(ListView):
     template_name = 'eventFinderApp/index.html'
     context_object_name = 'events_list'
 
@@ -14,48 +17,34 @@ class IndexView(generic.ListView):
         '''Return the events.'''
         return Event.objects.all()
 
-class EventView(generic.DetailView):
+class EventView(DetailView):
     model = Event
     template_name = 'eventFinderApp/event.html'
 
-# def event_submit(request):
-#     if request.method == 'POST':
-#         form = PostForm(request.POST)
-#         if form.is_valid():
-#             event = form.save(commit=False)
-#             event.save()
-#             form.save_m2m()
-#             return redirect('/event-finder/')
-#     else:
-#         form = PostForm()
-#     return render(request, 'eventFinderApp/event_submit.html', {'form': form})
+    def get_queryset(self):
+        hosted_events = Event.objects.filter(host=self.request.user)
+        return hosted_events
 
-# class FormView(View):
-#     form_class = NewEventForm
-#     initial = {'key': 'value'}
-#     template_name: 'event_submit.html'
-
-#     def get(self):
-#         form = self.form_class(initial=self.initial)
-#         return render(request, self.template_name, {'form': form})
-
-#     def post(self, request):
-#         form = self.form_class(request.POST)
-#         if form.is_valid():
-#             event = form.save(commit=False)
-#             event.save()
-#             form.save_m2m()
-#             return redirect('/event-finder/')
-#         return render(request, self.template_name, {'form': form})
-
-class CreateEventView(CreateView):
+class CreateEventView(LoginRequiredMixin, CreateView):
     template_name = 'eventFinderApp/event_submit.html'
     form_class = NewEventForm
+    login_url = '/users/login/'
 
     def form_valid(self, form):
+        form.instance.host = self.request.user
         print(form.cleaned_data)
         return super().form_valid(form)
-    
 
-def account(request):
-    return render(request, 'eventFinderApp/account.html')
+class EditEventView(LoginRequiredMixin, UpdateView):
+    template_name = 'eventFinderApp/event_edit.html'
+    form_class = NewEventForm
+
+    def get_object(self):
+        event_id = self.kwargs.get('pk')
+        return get_object_or_404(Event, pk=event_id, host=self.request.user)
+
+
+
+
+
+

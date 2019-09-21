@@ -1,8 +1,11 @@
+from django.conf import settings
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import User
+from users.models import CustomUser
 
 class Event(models.Model):
+    host = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.DO_NOTHING, null = "True")
     title = models.CharField(max_length=200)
     location = models.CharField(max_length=200)
     venue = models.CharField(max_length=200, null="True")
