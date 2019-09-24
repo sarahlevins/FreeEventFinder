@@ -1,5 +1,6 @@
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
@@ -7,6 +8,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
 from .models import Event
 from .forms import NewEventForm
+from .filters import EventFilter
 
 
 class IndexView(ListView):
@@ -41,7 +43,15 @@ class EditEventView(LoginRequiredMixin, UpdateView):
         return get_object_or_404(Event, pk=event_id, host=self.request.user)
 
 
+class FilterView(ListView):
+    template_name = 'eventFinderApp/event_filter.html'
+    context_object_name = 'events_list'
 
+    def get_queryset(self):
+        '''Return the events.'''
+        return Event.objects.all()
 
-
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = EventFilter(self.request.GET, queryset=self.get_queryset())
+        return context
