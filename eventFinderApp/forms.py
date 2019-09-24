@@ -11,5 +11,6 @@ class NewEventForm(forms.ModelForm):
         'location', 
         'venue',  
         'start_time',
-        'end_time', 
+        'end_time',
+        'description', 
         'categories',)
