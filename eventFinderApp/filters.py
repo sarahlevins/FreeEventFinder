@@ -7,5 +7,8 @@ class EventFilter(django_filters.FilterSet):
         model = Event
         fields = {
             'title': ['icontains'],
-            'location': ['icontains']
+            'location': ['icontains'],
+            'start_time': ['exact'],
+            'categories': ['exact']
+
         }
