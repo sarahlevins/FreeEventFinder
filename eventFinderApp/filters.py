@@ -1,14 +1,17 @@
-from .models import Event
+from django import forms
+from .models import Event, Category
 import django_filters
 
 class EventFilter(django_filters.FilterSet):
-        
+    title = django_filters.CharFilter(lookup_expr='icontains')
+    location = django_filters.CharFilter(lookup_expr='icontains')
+    categories = django_filters.ModelMultipleChoiceFilter(queryset=Category.objects.all(), widget = forms.CheckboxSelectMultiple)
+
     class Meta:
         model = Event
-        fields = {
-            'title': ['icontains'],
-            'location': ['icontains'],
-            'start_time': ['exact'],
-            'categories': ['exact']
+        fields = ['title', 'location', 'categories']
+        
 
-        }
+            # 'title': ['icontains'],
+            # 'location': ['icontains'],
+            # 'categories': ['exact']
