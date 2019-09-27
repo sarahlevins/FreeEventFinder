@@ -4,7 +4,8 @@
 {% block content %}
   
   <form method="GET">
-    {{ filter.form.as_p }}
+    {{ form.media }}
+    {{ filter.form|crispy }}
     <button type="submit">Search for Event</button>
   </form>
 

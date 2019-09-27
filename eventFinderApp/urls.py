@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:pk>/', views.EventView.as_view(), name='event'),
     path('event_submit/', views.CreateEventView.as_view(), name='event_submit'),
     path('event_edit/<int:pk>/', views.EditEventView.as_view(), name='event_edit'),
-    path('event_filter', views.FilterView.as_view(), name='event_filter')]
+    path('event_filter', views.FilterView.as_view(), name='event_filter'),
+    ]
